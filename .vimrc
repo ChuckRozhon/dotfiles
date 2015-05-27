@@ -6,11 +6,16 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+runtime! ftplugin/man.vim
+
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'wting/rust.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 Bundle 'jistr/vim-nerdtree-tabs'
 
 call vundle#end()
@@ -22,13 +27,11 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
-
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+
+let g:vim_markdown_folding_disabled=1
 
 nnoremap <F4> :NERDTreeTabsToggle<CR>
 
@@ -46,4 +49,12 @@ set exrc
 set secure
 autocmd BufWinLeave * call clearmatches()
 
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" Several useful options that I need "
+syntax on
+set backspace=indent,eol,start
+imap jj <Esc>
+nnoremap K :Man <cword>
+set ruler
+
+" Specific to limelight "
+let g:limelight_conceal_ctermfg = 'gray'
